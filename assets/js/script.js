@@ -7,9 +7,9 @@
   // Base folder for all real photography. Drop matching files here and they appear automatically —
   // see /assets/images/README.md for the exact filename each slot expects.
   const IMG_BASE = "assets/images/";
-  function productImg(p) { return `${IMG_BASE}products/${p.id}.jpeg`; }
-  function categoryImg(c) { return `${IMG_BASE}categories/${c.id}.jpeg`; }
-  function galleryImg(n) { return `${IMG_BASE}gallery/gallery-${n}.jpeg`; }
+  function productImg(p) { return `${IMG_BASE}products/${p.id}.webp`; }
+  function categoryImg(c) { return `${IMG_BASE}categories/${c.id}.webp`; }
+  function galleryImg(n) { return `${IMG_BASE}gallery/gallery-${n}.webp`; }
 
   /* ============ DATA ============ */
   const CATEGORIES = [
