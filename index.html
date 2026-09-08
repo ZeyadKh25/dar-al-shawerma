@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دار الشاورما — شاورما عالفحم بطعم الخليل</title>
+  <meta name="description"
+    content="دار الشاورما، الخليل — شاورما طازة عالفحم كل يوم. اطلب أكثر من صنف واحد وابعت طلبك عالواتساب بضغطة.">
+
+  <!-- TODO: replace with the real live domain once the site is deployed -->
+  <link rel="canonical" href="https://daralshawarma.example.com/">
+
+  <!-- Open Graph / Facebook / WhatsApp link previews -->
+  <meta property="og:type" content="restaurant.menu">
+  <meta property="og:site_name" content="دار الشاورما">
+  <meta property="og:title" content="دار الشاورما — شاورما عالفحم بطعم الخليل">
+  <meta property="og:description"
+    content="شاورما طازة عالفحم كل يوم بالخليل. اطلب أكثر من صنف واحد وابعت طلبك عالواتساب بضغطة.">
+  <meta property="og:image" content="https://daralshawarma.example.com/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://daralshawarma.example.com/">
+  <meta property="og:locale" content="ar_AR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="دار الشاورما — شاورما عالفحم بطعم الخليل">
+  <meta name="twitter:description" content="شاورما طازة عالفحم كل يوم بالخليل. اطلب عالواتساب بضغطة.">
+  <meta name="twitter:image" content="https://daralshawarma.example.com/assets/images/og-image.jpg">
+
+  <!-- Structured data for Google (LocalBusiness/Restaurant rich results) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "دار الشاورما",
+  "image": "https://daralshawarma.example.com/assets/images/og-image.jpg",
+  "servesCuisine": ["Middle Eastern", "Shawarma", "Palestinian"],
+  "priceRange": "₪₪",
+  "telephone": "+970592419577",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "شارع القدس",
+    "addressLocality": "الخليل",
+    "addressCountry": "PS"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "12:00",
+    "closes": "23:59"
+  },
+  "url": "https://daralshawarma.example.com/",
+  "acceptsReservations": "False"
+}
+</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Aref+Ruqaa:wght@700&family=Fraunces:ital,wght@1,400;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- ============ TOP TRUST BAR ============ -->
+  <div class="topbar">
+    <div class="container">
+      <span data-ar="طازة كل يوم عالفحم" data-en="Fresh Charcoal-Grilled Daily">طازة كل يوم عالفحم</span>
+      <span class="dot">•</span>
+      <span data-ar="توصيل سريع بكل الخليل" data-en="Fast Delivery Across Hebron">توصيل سريع بكل الخليل</span>
+      <span class="dot">•</span>
+      <span><span class="stars">★★★★★</span> <span data-ar="بثقة أكتر من ٥٠٠٠ زبون"
+          data-en="Trusted by 5,000+ Customers">بثقة أكتر من ٥٠٠٠ زبون</span></span>
+    </div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="#top" class="logo">
+        <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round">
+            <path d="M9 3v18M9 3c3 0 4.5 1.5 4.5 4S12 11 9 11m6-8v18" />
+          </svg></span>
+        <span>
+          <span data-ar="دار الشاورما" data-en="Dar Al-Shawarma">دار الشاورما</span>
+          <small data-ar="الخليل، فلسطين" data-en="Hebron, Palestine">الخليل، فلسطين</small>
+        </span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="#bestsellers" data-ar="الأكثر طلبًا" data-en="Best Sellers">الأكثر طلبًا</a></li>
+        <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
+        <li><a href="#story" data-ar="قصتنا" data-en="About">قصتنا</a></li>
+        <li><a href="#offer" data-ar="العروض" data-en="Offers">العروض</a></li>
+        <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Toggle language">EN</button>
+        <button class="icon-btn" id="cartBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 4h2l2.2 11.4a2 2 0 002 1.6h7.6a2 2 0 002-1.6L20 8H6" />
+            <circle cx="9" cy="20" r="1.4" />
+            <circle cx="17" cy="20" r="1.4" />
+          </svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <a href="#menu" class="btn btn-primary btn-sm nav-order-btn" data-ar="اطلب هلق" data-en="Order Now">اطلب هلق</a>
+        <button class="icon-btn burger" id="burgerBtn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="container">
+      <div class="mobile-menu-top">
+        <a href="#" class="logo">
+          <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round">
+              <path d="M9 3v18M9 3c3 0 4.5 1.5 4.5 4S12 11 9 11m6-8v18" />
+            </svg></span>
+          <span data-ar="دار الشاورما" data-en="Dar Al-Shawarma">دار الشاورما</span>
+        </a>
+        <button class="icon-btn" id="closeMenuBtn" aria-label="Close menu" style="border-color:var(--line-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--cream)" stroke-width="1.8" stroke-linecap="round">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+      <ul class="mobile-links">
+        <li><a href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="#bestsellers" data-ar="الأكثر طلبًا" data-en="Best Sellers">الأكثر طلبًا</a></li>
+        <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
+        <li><a href="#story" data-ar="قصتنا" data-en="About">قصتنا</a></li>
+        <li><a href="#offer" data-ar="العروض" data-en="Offers">العروض</a></li>
+        <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+      </ul>
+      <a href="#menu" class="btn btn-primary" data-ar="اطلب هلق" data-en="Order Now">اطلب هلق</a>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <header id="top" class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-headline">
+          <span class="line-1" data-ar="شاورما" data-en="Made">شاورما</span>
+          <span class="line-2" data-ar="عالفحم." data-en="Better.">عالفحم.</span>
+        </h1>
+        <p class="lede" data-ar="شاورما طازة عالفحم بنكهة الخليل — اختار أكتر من صنف وابعتلنا طلبك عالواتساب بضغطة."
+          data-en="Fresh charcoal shawarma with the taste of Hebron — pick as many dishes as you like and send your order on WhatsApp in one tap.">
+          شاورما طازة عالفحم بنكهة الخليل — اختار أكتر من صنف وابعتلنا طلبك عالواتساب بضغطة.</p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn btn-primary" data-ar="اطلب هلق" data-en="Order Now">اطلب هلق</a>
+          <a href="#menu" class="btn btn-outline" data-ar="شوف المنيو" data-en="Explore Menu">شوف المنيو</a>
+        </div>
+        <div class="hero-features">
+          <div class="feature-item">
+            <span class="feature-ic">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M15 9C15 12.866 11.866 16 8 16C4.13401 16 1 12.866 1 9C1 5.5 4 3 4 3H6V4.5C6 5.05228 6.44772 5.5 7 5.5C7.55228 5.5 8 5.05228 8 4.5V0H10C10 0 15 3 15 9ZM10 12C10 13.1046 9.10457 14 8 14C6.89543 14 6 13.1046 6 12C6 9.5 8 8 8 8C8 8 10 9.5 10 12Z"
+                    fill="var(--accent-dark)"></path>
+                </g>
+              </svg>
+            </span>
+            <span><strong data-ar="عالفحم ١٠٠٪" data-en="100% Charcoal">عالفحم ١٠٠٪</strong><small
+                data-ar="نكهة أصيلة مش غاز" data-en="Real fire, never gas">نكهة أصيلة مش غاز</small></span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-ic ic">
+              <svg fill="var(--accent-dark)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M8,3V7H21l-2,7H8v2H18a1,1,0,0,1,0,2H7a1,1,0,0,1-1-1V4H4A1,1,0,0,1,4,2H7A1,1,0,0,1,8,3ZM6,20.5A1.5,1.5,0,1,0,7.5,19,1.5,1.5,0,0,0,6,20.5Zm9,0A1.5,1.5,0,1,0,16.5,19,1.5,1.5,0,0,0,15,20.5Z">
+                  </path>
+                </g>
+              </svg>
+            </span>
+            <span><strong data-ar="توصيل سريع" data-en="Fast Delivery">توصيل سريع</strong><small
+                data-ar="لباب بيتك بالخليل" data-en="Straight to your door">لباب بيتك بالخليل</small></span>
+          </div>
+        </div>
+      </div>
+      <!-- 
+    <div class="hero-visual">
+      <div class="hero-photo-frame"> -->
+      <img src="assets/images/hero/heroo.png" alt="دار الشاورما — شاورما عالفحم" fetchpriority="high"
+        onerror="this.style.display='none'">
+      <!-- </div>
+    </div> -->
+    </div>
+
+  </header>
+
+  <main>
+
+    <!-- ============ WHY CHOOSE US ============ -->
+    <section class="value-strip">
+      <div class="container">
+        <span class="eyebrow" data-ar="ليش دار الشاورما" data-en="Why Choose Us">ليش دار الشاورما</span>
+        <h2 data-ar="أسباب حقيقية بترجعنا نطلب منهم" data-en="Real reasons customers keep coming back">أسباب حقيقية
+          بترجعنا نطلب منهم</h2>
+        <div class="value-grid">
+          <div class="value-item">
+            <div class="ic">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M15 9C15 12.866 11.866 16 8 16C4.13401 16 1 12.866 1 9C1 5.5 4 3 4 3H6V4.5C6 5.05228 6.44772 5.5 7 5.5C7.55228 5.5 8 5.05228 8 4.5V0H10C10 0 15 3 15 9ZM10 12C10 13.1046 9.10457 14 8 14C6.89543 14 6 13.1046 6 12C6 9.5 8 8 8 8C8 8 10 9.5 10 12Z"
+                    fill="#000000"></path>
+                </g>
+              </svg>
+            </div>
+            <h3 data-ar="فحم حقيقي، مش غاز" data-en="Real Charcoal, Never Gas">فحم حقيقي، مش غاز</h3>
+            <p data-ar="كل صنف بالمنيو بيتشوى عالفحم بالطريقة التقليدية."
+              data-en="Every item on the menu is grilled the traditional way, over real charcoal.">كل صنف بالمنيو بيتشوى
+              عالفحم بالطريقة التقليدية.</p>
+          </div>
+          <div class="value-item">
+            <div class="ic">
+              <svg viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path fill="#000000" fill-rule="evenodd"
+                    d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z"
+                    transform="translate(-197 -150)"></path>
+                </g>
+              </svg>
+            </div>
+            <h3 data-ar="بنحضّر أول ما تطلب" data-en="Made Fresh When You Order">بنحضّر أول ما تطلب</h3>
+            <p data-ar="ما في تجهيز مسبق — كل طلبية تتشوى وتتحضر بعد ما توصلنا."
+              data-en="Nothing is pre-made — everything is grilled and prepared after your order arrives.">ما في تجهيز
+              مسبق — كل طلبية تتشوى وتتحضر بعد ما توصلنا.</p>
+          </div>
+          <div class="value-item">
+            <div class="ic">
+              <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+            <h3 data-ar="طلب مباشر بدون وسيط" data-en="Direct Ordering, No Middleman">طلب مباشر بدون وسيط</h3>
+            <p data-ar="بتطلب مباشرة منا عالواتساب، بلا رسوم تطبيقات إضافية."
+              data-en="You order directly with us on WhatsApp — no extra app fees.">بتطلب مباشرة منا عالواتساب، بلا رسوم
+              تطبيقات إضافية.</p>
+          </div>
+          <div class="value-item">
+            <div class="ic">
+              <svg fill="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M8,3V7H21l-2,7H8v2H18a1,1,0,0,1,0,2H7a1,1,0,0,1-1-1V4H4A1,1,0,0,1,4,2H7A1,1,0,0,1,8,3ZM6,20.5A1.5,1.5,0,1,0,7.5,19,1.5,1.5,0,0,0,6,20.5Zm9,0A1.5,1.5,0,1,0,16.5,19,1.5,1.5,0,0,0,15,20.5Z">
+                  </path>
+                </g>
+              </svg>
+            </div>
+            <h3 data-ar="توصيل داخل الخليل" data-en="Delivery Across Hebron">توصيل داخل الخليل</h3>
+            <p data-ar="بنوصلك أينما كنت داخل المدينة بأسرع وقت ممكن."
+              data-en="We deliver anywhere in the city, as fast as possible.">بنوصلك أينما كنت داخل المدينة بأسرع وقت
+              ممكن.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ BEST SELLERS BANNER (carousel) ============ -->
+    <section class="section tight">
+      <div class="container">
+        <div class="section-head center reveal" style="margin-bottom:2.5rem">
+          <span class="eyebrow" style="justify-content:center" data-ar="الأكثر مبيعًا" data-en="Best Sellers">الأكثر
+            مبيعًا</span>
+          <h2 data-ar="BEST SELLERS" data-en="BEST SELLERS">BEST SELLERS</h2>
+          <p data-ar="أكثر أطباق الشاورما يلي بيحبها زباينا" data-en="Our most loved shawarma picks">أكثر أطباق الشاورما
+            يلي بيحبها زباينا</p>
+        </div>
+        <div class="bsb reveal" id="bsbBanner" role="region" aria-roledescription="carousel"
+          aria-label="أفضل مبيعاتنا / Best Sellers">
+          <div class="bsb-track" id="bsbTrack"></div>
+
+          <button type="button" class="bsb-arrow bsb-prev" id="bsbPrev" aria-label="السابق" data-ar-aria="السابق"
+            data-en-aria="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M15 6l-6 6 6 6" />
+            </svg>
+          </button>
+          <button type="button" class="bsb-arrow bsb-next" id="bsbNext" aria-label="التالي" data-ar-aria="التالي"
+            data-en-aria="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+
+          <div class="bsb-dots" id="bsbDots" role="tablist" aria-label="اختيار الشريحة"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ CATEGORY TILES ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-head">
+            <span class="eyebrow" data-ar="تصفح الأصناف" data-en="Browse Categories">تصفح الأصناف</span>
+            <h2 data-ar="في شي بيشتهيه الكل" data-en="Something for Every Craving">في شي بيشتهيه الكل</h2>
+            <p data-ar="اختار الصنف وشوف كل الأصناف يلي جواته بالمنيو الكامل."
+              data-en="Pick a category to jump straight to the full menu.">اختار الصنف وشوف كل الأصناف يلي جواته بالمنيو
+              الكامل.</p>
+          </div>
+        </div>
+        <div class="cat-grid reveal" id="catTiles"></div>
+      </div>
+    </section>
+
+    <!-- ============ BEST SELLERS ============ -->
+    <section class="section tight" id="bestsellers" style="background:var(--cream-2)">
+      <div class="container">
+        <div class="section-top reveal">
+          <div class="section-head">
+            <span class="eyebrow" data-ar="الأكثر طلبًا" data-en="Best Sellers">الأكثر طلبًا</span>
+            <h2 data-ar="أطباقنا يلي بيحبها الكل" data-en="Our Most-Loved Dishes">أطباقنا يلي بيحبها الكل</h2>
+            <p data-ar="هاي الأطباق يلي زباينا برجعولها دايمًا."
+              data-en="These are the dishes our customers keep coming back for.">هاي الأطباق يلي زباينا برجعولها دايمًا.
+            </p>
+          </div>
+          <a href="#menu" class="btn-ghost" style="display:flex;align-items:center;gap:.4rem;font-weight:800">
+            <span data-ar="شوف المنيو الكامل" data-en="View Full Menu">شوف المنيو الكامل</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M5 12h13M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+        <div class="dish-grid reveal" id="bestSellersGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ DIGITAL MENU ============ -->
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-head reveal" style="margin-bottom:2.5rem">
+          <span class="eyebrow" data-ar="المنيو الكامل" data-en="Digital Menu">المنيو الكامل</span>
+          <h2 data-ar="اطلب أكتر من صنف بضغطة" data-en="Order Everything in One Go">اطلب أكتر من صنف بضغطة</h2>
+          <p data-ar="اختار الكمية لكل صنف، ضيفه عالطلب، وابعت الطلب كامل عالواتساب."
+            data-en="Choose a quantity for each dish, add it to your order, then send the whole thing on WhatsApp.">
+            اختار الكمية لكل صنف، ضيفه عالطلب، وابعت الطلب كامل عالواتساب.</p>
+        </div>
+        <div class="menu-tabs reveal" id="menuTabs"></div>
+        <div class="dish-grid reveal" id="menuGrid"></div>
+      </div>
+    </section>
+
+
+    <!-- ============ SOCIAL PROOF ============ -->
+    <section class="section proof">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" style="justify-content:center" data-ar="آراء زباينا" data-en="Customer Reviews">آراء
+            زباينا</span>
+          <h2 data-ar="بثقة زباينا" data-en="Loved by Our Customers">بثقة زباينا</h2>
+        </div>
+        <div class="proof-stats reveal">
+          <div class="stat"><b>4.9/5</b><span data-ar="معدل التقييم" data-en="Average Rating">معدل التقييم</span></div>
+          <div class="stat"><b data-ar="+٥٠٠٠" data-en="5,000+">+٥٠٠٠</b><span data-ar="زبون راضي"
+              data-en="Happy Customers">زبون راضي</span></div>
+          <div class="stat"><b data-ar="+٢٠٠٠٠" data-en="20,000+">+٢٠٠٠٠</b><span data-ar="طلبية متوصلة"
+              data-en="Orders Served">طلبية متوصلة</span></div>
+        </div>
+        <!-- PLACEHOLDER REVIEWS: replace with real customer reviews before launch -->
+        <div class="testi-track reveal">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p data-ar="أصدق شاورما بالخليل، وطعمها زي أول مرة بكل مرة. صراحة صرت أطلب منهم كل أسبوع."
+              data-en="Honestly the best shawarma in Hebron — tastes just as good every single time. I order weekly now.">
+              أصدق شاورما بالخليل، وطعمها زي أول مرة بكل مرة. صراحة صرت أطلب منهم كل أسبوع.</p>
+            <div class="testi-who">
+              <div class="testi-avatar">أ.ح</div>
+              <div><strong data-ar="أحمد ح." data-en="Ahmad H.">أحمد ح.</strong><small data-ar="زبون دائم"
+                  data-en="Regular Customer">زبون دائم</small></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p data-ar="التوصيل سريع بشكل، والأكل بيوصل لسا سخن. خدمة محترمة وأسعار منطقية."
+              data-en="Delivery is quick and the food still arrives hot. Great service and fair prices.">التوصيل سريع
+              بشكل، والأكل بيوصل لسا سخن. خدمة محترمة وأسعار منطقية.</p>
+            <div class="testi-who">
+              <div class="testi-avatar">ل.ك</div>
+              <div><strong data-ar="لينا ك." data-en="Lina K.">لينا ك.</strong><small data-ar="زبونة جديدة"
+                  data-en="New Customer">زبونة جديدة</small></div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <p data-ar="صحن المشاوي يستاهل كل قرش، والحصة سخية فعلاً. بنصح فيهم بعيون مغمضة."
+              data-en="The grill plate is worth every shekel, and the portion is genuinely generous. Highly recommend.">
+              صحن المشاوي يستاهل كل قرش، والحصة سخية فعلاً. بنصح فيهم بعيون مغمضة.</p>
+            <div class="testi-who">
+              <div class="testi-avatar">م.ط</div>
+              <div><strong data-ar="محمود ط." data-en="Mahmoud T.">محمود ط.</strong><small data-ar="زبون دائم"
+                  data-en="Regular Customer">زبون دائم</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BRAND STORY ============ -->
+    <section class="section story" id="story">
+      <div class="container story-grid">
+        <div class="story-visual reveal"
+          style="background:radial-gradient(130% 130% at 30% 20%, #FBAD5C, #8E4B04 55%, #1B1613 100%)">
+          <img src="assets/images/categories/grills.jpeg" alt="دار الشاورما" loading="lazy"
+            onerror="this.style.display='none'">
+        </div>
+        <div class="story-copy reveal">
+          <span class="eyebrow" data-ar="قصتنا" data-en="Our Story">قصتنا</span>
+          <h2 data-ar="مش بس أكلة" data-en="More Than Just a Meal">مش بس أكلة</h2>
+          <p data-ar="دار الشاورما بلشت من مطبخ صغير بقلب الخليل، وهسا صارت وجهة كل يلي بيدور عالطعم الأصيل. منحضّر كل شي طازة وعالفحم وبأيدينا، لأن الأكل الطيب لازم يحمل شغلة قلب."
+            data-en="Dar Al-Shawarma started in a small kitchen in the heart of Hebron, and grew into a go-to spot for anyone chasing real flavor. Everything is prepared fresh, over real charcoal, by hand — because good food should always carry a bit of heart.">
+            دار الشاورما بلشت من مطبخ صغير بقلب الخليل، وهسا صارت وجهة كل يلي بيدور عالطعم الأصيل. منحضّر كل شي طازة
+            وعالفحم وبأيدينا، لأن الأكل الطيب لازم يحمل شغلة قلب.</p>
+          <p class="quote" data-ar="من قلب الخليل، لطاولتك." data-en="From the heart of Hebron, to your table.">من قلب
+            الخليل، لطاولتك.</p>
+          <a href="#contact" class="btn btn-outline" data-ar="اقرا قصتنا" data-en="Discover Our Story">اقرا قصتنا</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROMO ============ -->
+    <section class="section tight" id="offer">
+      <div class="promo reveal">
+        <div class="promo-glow"></div>
+        <div class="promo-inner">
+          <span class="eyebrow" data-ar="جعان؟ هاد الإعلان إلك." data-en="HUNGRY? THIS ONE'S FOR YOU.">جعان؟ هاد الإعلان
+            إلك.</span>
+          <h2 data-ar="خصم ١٥٪ عأول طلبية" data-en="15% Off Your First Order">خصم ١٥٪ عأول طلبية</h2>
+          <p style="color:var(--muted-2)" data-ar="جرّب دار الشاورما لأول مرة وخد خصم فوري."
+            data-en="Try Dar Al-Shawarma for the first time and get an instant discount.">جرّب دار الشاورما لأول مرة وخد
+            خصم فوري.</p>
+          <div class="code">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round">
+              <path d="M9 6L3 12l6 6M15 6l6 6-6 6" />
+            </svg>
+            WELCOME15
+          </div>
+          <div><a href="#menu" class="btn btn-primary" data-ar="استخدم الكود" data-en="Claim Offer">استخدم الكود</a>
+          </div>
+          <p class="terms" data-ar="على الطلبات فوق ٥٠ شيكل. اذكر الكود بالملاحظات عند الطلب."
+            data-en="Valid on orders over ₪50. Mention the code in your order notes.">على الطلبات فوق ٥٠ شيكل. اذكر
+            الكود بالملاحظات عند الطلب.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center reveal" style="margin-bottom:3.5rem">
+          <span class="eyebrow" style="justify-content:center" data-ar="طريقة الطلب" data-en="How It Works">طريقة
+            الطلب</span>
+          <h2 data-ar="من الرغبة لباب بيتك" data-en="From Craving to Your Door">من الرغبة لباب بيتك</h2>
+        </div>
+        <div class="steps reveal">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3 data-ar="اختار وضيف عالطلب" data-en="Choose & Add to Order">اختار وضيف عالطلب</h3>
+            <p data-ar="تصفح المنيو وضيف كل الأصناف يلي بتشتهيها."
+              data-en="Browse the menu and add every dish you're craving.">تصفح المنيو وضيف كل الأصناف يلي بتشتهيها.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3 data-ar="راجع طلبك وابعته" data-en="Review & Send">راجع طلبك وابعته</h3>
+            <p data-ar="افتح السلة، راجع الكمية والسعر، وابعت الطلب عالواتساب."
+              data-en="Open your cart, review quantities and total, then send it on WhatsApp.">افتح السلة، راجع الكمية
+              والسعر، وابعت الطلب عالواتساب.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3 data-ar="استلم طازة وسخنة" data-en="Get It Fresh & Hot">استلم طازة وسخنة</h3>
+            <p data-ar="نحضره عالفحم ونوصله لباب بيتك بسرعة."
+              data-en="We grill it fresh over charcoal and deliver it fast.">نحضره عالفحم ونوصله لباب بيتك بسرعة.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section tight" style="background:var(--cream-2)">
+      <div class="container">
+        <div class="section-head center reveal" style="margin-bottom:2.2rem">
+          <span class="eyebrow" style="justify-content:center" data-ar="معرض الصور" data-en="Gallery">معرض الصور</span>
+          <h2 data-ar="شوف شو عم نشوي" data-en="See What We're Grilling">شوف شو عم نشوي</h2>
+        </div>
+        <div class="gallery-tabs reveal" id="galleryTabs"></div>
+        <div class="gallery-grid reveal" id="galleryGrid"></div>
+        <div class="gallery-cta reveal">
+          <a href="#" class="btn btn-outline" data-ar="تابعنا عالإنستغرام" data-en="Follow us on Instagram">تابعنا
+            عالإنستغرام</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOCATION ============ -->
+    <section class="section location" id="contact">
+      <div class="container loc-grid">
+        <div class="reveal">
+          <span class="eyebrow" style="color:var(--accent-light)" data-ar="زورونا" data-en="Visit Us">زورونا</span>
+          <h2 style="font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:800;margin-top:.5rem" data-ar="وين تلاقينا"
+            data-en="Where to Find Us">وين تلاقينا</h2>
+          <div class="loc-list">
+            <div class="loc-item">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 22s7-7.5 7-13a7 7 0 10-14 0c0 5.5 7 13 7 13z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg></div>
+              <div><strong data-ar="العنوان" data-en="Address">العنوان</strong><span
+                  data-ar="شارع القدس، الخليل، فلسطين (عنوان مبدئي — للتحديث)"
+                  data-en="Al-Quds Street, Hebron, Palestine (placeholder — to confirm)">شارع القدس، الخليل، فلسطين
+                  (عنوان مبدئي — للتحديث)</span></div>
+            </div>
+            <div class="loc-item">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg></div>
+              <div><strong data-ar="ساعات الدوام" data-en="Opening Hours">ساعات الدوام</strong><span
+                  data-ar="يوميًا: ١٢ ظهرًا – ١٢ منتصف الليل" data-en="Daily: 12 PM – 12 AM">يوميًا: ١٢ ظهرًا – ١٢ منتصف
+                  الليل</span></div>
+            </div>
+            <div class="loc-item">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M17 3a4 4 0 014 4c0 4-6 8-9 10-3-2-9-6-9-10a4 4 0 017-2.5A4 4 0 0117 3z" />
+                </svg></div>
+              <div><strong data-ar="واتساب / اتصال" data-en="WhatsApp / Call">واتساب / اتصال</strong><span dir="ltr"
+                  id="phoneDisplay">+970 59 241 9577</span></div>
+            </div>
+          </div>
+          <div class="loc-cta">
+            <a href="https://www.google.com/maps/search/?api=1&query=Hebron+Palestine" target="_blank" rel="noopener"
+              class="btn btn-primary" data-ar="احصل ع الاتجاهات" data-en="Get Directions">احصل ع الاتجاهات</a>
+            <a href="#" id="waDirectBtn" class="btn btn-whatsapp" data-ar="اطلب عالواتساب"
+              data-en="Order on WhatsApp">اطلب عالواتساب</a>
+          </div>
+        </div>
+        <div class="map-embed reveal">
+          <!-- Placeholder Hebron map query — replace with the exact business address/pin once confirmed -->
+          <iframe src="https://www.google.com/maps?q=Hebron,Palestine&output=embed" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Dar Al-Shawarma location"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="section final-cta">
+      <div class="container">
+        <h2 data-ar="الأكل الطيب ع بعد كبسة." data-en="Good Food Is Just One Tap Away.">الأكل الطيب ع بعد كبسة.</h2>
+        <p data-ar="اطلب أكلاتك المفضلة واستمتع بطعم طازة بلا أي انتظار."
+          data-en="Order your favorites and enjoy fresh, delicious food without the wait.">اطلب أكلاتك المفضلة واستمتع
+          بطعم طازة بلا أي انتظار.</p>
+        <div class="cta-row">
+          <a href="#menu" class="btn btn-primary" data-ar="اطلب هلق" data-en="Order Now">اطلب هلق</a>
+          <a href="#" id="waDirectBtn2" class="btn btn-outline on-dark" data-ar="اطلب عالواتساب"
+            data-en="Order via WhatsApp">اطلب عالواتساب</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round">
+                <path d="M9 3v18M9 3c3 0 4.5 1.5 4.5 4S12 11 9 11m6-8v18" />
+              </svg></span>
+            <span data-ar="دار الشاورما" data-en="Dar Al-Shawarma">دار الشاورما</span>
+          </a>
+          <p data-ar="شاورما عالفحم من قلب الخليل، طازة كل يوم."
+            data-en="Charcoal shawarma from the heart of Hebron, fresh every day.">شاورما عالفحم من قلب الخليل، طازة كل
+            يوم.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" />
+              </svg></a>
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                <path d="M15 8h2V5h-2a4 4 0 00-4 4v2H9v3h2v6h3v-6h2.5l.5-3H14V9a1 1 0 011-1z" />
+              </svg></a>
+            <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+                <path d="M14 4v10.5a3 3 0 11-3-3M14 4a5 5 0 005 5" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h4>
+          <ul>
+            <li><a href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+            <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
+            <li><a href="#story" data-ar="قصتنا" data-en="About">قصتنا</a></li>
+            <li><a href="#offer" data-ar="العروض" data-en="Offers">العروض</a></li>
+            <li><a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-ar="خدمة الزبائن" data-en="Customer Support">خدمة الزبائن</h4>
+          <ul>
+            <li><a href="#" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a></li>
+            <li><a href="#" data-ar="معلومات التوصيل" data-en="Delivery Information">معلومات التوصيل</a></li>
+            <li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+            <li><a href="#" data-ar="الشروط والأحكام" data-en="Terms & Conditions">الشروط والأحكام</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-ar="اشترك للعروض" data-en="Newsletter">اشترك للعروض</h4>
+          <p style="font-size:.85rem;line-height:1.6" data-ar="خد العروض والأخبار الجديدة أول بأول."
+            data-en="Get exclusive offers and updates first.">خد العروض والأخبار الجديدة أول بأول.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" required placeholder="you@email.com" data-ar-placeholder="بريدك الإلكتروني"
+              data-en-placeholder="you@email.com" aria-label="Email">
+            <button type="submit" data-ar="اشترك" data-en="Subscribe">اشترك</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-ar="© 2026 دار الشاورما. جميع الحقوق محفوظة."
+          data-en="© 2026 Dar Al-Shawarma. All rights reserved.">© 2026 دار الشاورما. جميع الحقوق محفوظة.</span>
+        <span data-ar="صُمم بحب من دقيقة ويب" data-en="Designed with care by دقيقة ويب">صُمم بحب من دقيقة ويب</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ CART DRAWER ============ -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer" aria-label="Order cart">
+    <div class="drawer-head">
+      <div class="drawer-head-title">
+        <h3 data-ar="طلبك" data-en="Your Order">طلبك</h3>
+        <button type="button" id="clearCartBtn" class="clear-cart-btn" data-ar="حذف الكل" data-en="Clear All">حذف
+          الكل</button>
+      </div>
+      <button class="icon-btn" id="closeDrawerBtn" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot">
+      <div class="drawer-total">
+        <span data-ar="الإجمالي" data-en="Total">الإجمالي</span>
+        <b id="drawerTotal">0 ₪</b>
+      </div>
+      <button class="btn btn-whatsapp" id="sendOrderBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 3a4 4 0 014 4c0 4-6 8-9 10-3-2-9-6-9-10a4 4 0 017-2.5A4 4 0 0117 3z" />
+        </svg>
+        <span data-ar="ابعت الطلب عالواتساب" data-en="Send Order via WhatsApp">ابعت الطلب عالواتساب</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============ MOBILE STICKY CTA ============ -->
+  <div class="mobile-sticky" id="mobileSticky">
+    <div class="cart-info">
+      <span data-ar="السلة" data-en="Cart"><span id="stickyCount">0</span> <span data-ar="أصناف"
+          data-en="Items">أصناف</span></span>
+      <b id="stickyTotal">0 ₪</b>
+    </div>
+    <button class="btn btn-primary" id="stickyViewBtn" data-ar="شوف الطلب" data-en="View Order">شوف الطلب</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+
+</html>
