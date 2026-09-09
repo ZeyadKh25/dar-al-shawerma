@@ -110,7 +110,8 @@
           </svg>
           <span class="cart-badge" id="cartBadge">0</span>
         </button>
-        <a href="#menu" class="btn btn-primary btn-sm nav-order-btn" data-ar="اطلب الأن" data-en="Order Now">اطلب الأن</a>
+        <a href="#menu" class="btn btn-primary btn-sm nav-order-btn" data-ar="اطلب الأن" data-en="Order Now">اطلب
+          الأن</a>
         <button class="icon-btn burger" id="burgerBtn" aria-label="Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round">
             <path d="M4 7h16M4 12h16M4 17h16" />
@@ -209,6 +210,41 @@
 
   <main>
 
+    <!-- ============ BEST SELLERS BANNER (carousel) ============ -->
+    <section class="section tight">
+      <div class="container">
+        <div class="section-head center reveal" style="margin-bottom:2.5rem">
+          <span class="eyebrow" style="justify-content:center" data-ar="الأكثر مبيعًا" data-en="Best Sellers">الأكثر
+            مبيعًا</span>
+          <h2 data-ar="BEST SELLERS" data-en="BEST SELLERS">الاكثر طلبا</h2>
+          <p data-ar="أكثر أطباق الشاورما يلي بيحبها زباينا" data-en="Our most loved shawarma picks">أكثر أطباق الشاورما
+            يلي بيحبها زباينا</p>
+        </div>
+        <div class="bsb reveal" id="bsbBanner" role="region" aria-roledescription="carousel"
+          aria-label="أفضل مبيعاتنا / Best Sellers">
+          <div class="bsb-track" id="bsbTrack"></div>
+
+          <button type="button" class="bsb-arrow bsb-prev" id="bsbPrev" aria-label="السابق" data-ar-aria="السابق"
+            data-en-aria="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M15 6l-6 6 6 6" />
+            </svg>
+          </button>
+          <button type="button" class="bsb-arrow bsb-next" id="bsbNext" aria-label="التالي" data-ar-aria="التالي"
+            data-en-aria="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+
+          <div class="bsb-dots" id="bsbDots" role="tablist" aria-label="اختيار الشريحة"></div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- ============ WHY CHOOSE US ============ -->
     <section class="value-strip">
       <div class="container">
@@ -289,39 +325,7 @@
     </section>
 
 
-    <!-- ============ BEST SELLERS BANNER (carousel) ============ -->
-    <section class="section tight">
-      <div class="container">
-        <div class="section-head center reveal" style="margin-bottom:2.5rem">
-          <span class="eyebrow" style="justify-content:center" data-ar="الأكثر مبيعًا" data-en="Best Sellers">الأكثر
-            مبيعًا</span>
-          <h2 data-ar="BEST SELLERS" data-en="BEST SELLERS">BEST SELLERS</h2>
-          <p data-ar="أكثر أطباق الشاورما يلي بيحبها زباينا" data-en="Our most loved shawarma picks">أكثر أطباق الشاورما
-            يلي بيحبها زباينا</p>
-        </div>
-        <div class="bsb reveal" id="bsbBanner" role="region" aria-roledescription="carousel"
-          aria-label="أفضل مبيعاتنا / Best Sellers">
-          <div class="bsb-track" id="bsbTrack"></div>
 
-          <button type="button" class="bsb-arrow bsb-prev" id="bsbPrev" aria-label="السابق" data-ar-aria="السابق"
-            data-en-aria="Previous slide">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M15 6l-6 6 6 6" />
-            </svg>
-          </button>
-          <button type="button" class="bsb-arrow bsb-next" id="bsbNext" aria-label="التالي" data-ar-aria="التالي"
-            data-en-aria="Next slide">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M9 6l6 6-6 6" />
-            </svg>
-          </button>
-
-          <div class="bsb-dots" id="bsbDots" role="tablist" aria-label="اختيار الشريحة"></div>
-        </div>
-      </div>
-    </section>
 
 
     <!-- ============ CATEGORY TILES ============ -->
@@ -341,7 +345,7 @@
     </section>
 
     <!-- ============ BEST SELLERS ============ -->
-    <section class="section tight" id="bestsellers" style="background:var(--cream-2)">
+    <section class="section tight" id="bestsellers">
       <div class="container">
         <div class="section-top reveal">
           <div class="section-head">
@@ -387,7 +391,8 @@
             زباينا</span>
           <h2 data-ar="بثقة زباينا" data-en="Loved by Our Customers">بثقة زباينا</h2>
         </div>
-        <div class="proof-stats reveal">
+        <div class="proof-stats reveal"
+          style="background: var(--white); border-radius: var(--r-m); padding: 1.8rem; border: 1px solid var(--line)">
           <div class="stat"><b>4.9/5</b><span data-ar="معدل التقييم" data-en="Average Rating">معدل التقييم</span></div>
           <div class="stat"><b data-ar="+٥٠٠٠" data-en="5,000+">+٥٠٠٠</b><span data-ar="زبون راضي"
               data-en="Happy Customers">زبون راضي</span></div>
@@ -456,7 +461,7 @@
     </section>
 
     <!-- ============ PROMO ============ -->
-    <section class="section tight" id="offer">
+    <!-- <section class="section tight" id="offer">
       <div class="promo reveal">
         <div class="promo-glow"></div>
         <div class="promo-inner">
@@ -480,10 +485,10 @@
             الكود بالملاحظات عند الطلب.</p>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- ============ HOW IT WORKS ============ -->
-    <section class="section">
+    <section class=" section tight" style="margin-bottom: 2rem;">
       <div class="container">
         <div class="section-head center reveal" style="margin-bottom:3.5rem">
           <span class="eyebrow" style="justify-content:center" data-ar="طريقة الطلب" data-en="How It Works">طريقة
@@ -515,7 +520,7 @@
     </section>
 
     <!-- ============ GALLERY ============ -->
-    <section class="section tight" style="background:var(--cream-2)">
+    <section>
       <div class="container">
         <div class="section-head center reveal" style="margin-bottom:2.2rem">
           <span class="eyebrow" style="justify-content:center" data-ar="معرض الصور" data-en="Gallery">معرض الصور</span>
@@ -661,7 +666,7 @@
       <div class="footer-bottom">
         <span data-ar="© 2026 دار الشاورما. جميع الحقوق محفوظة."
           data-en="© 2026 Dar Al-Shawarma. All rights reserved.">© 2026 دار الشاورما. جميع الحقوق محفوظة.</span>
-        <span data-ar="صُمم بحب من دقيقة ويب" data-en="Designed with care by دقيقة ويب">صُمم بحب من دقيقة ويب</span>
+        <span data-ar="صُمم بحب بواسطة زياد" data-en="Designed with care by ziyad">صُمم بحب بواسطة زياد</span>
       </div>
     </div>
   </footer>

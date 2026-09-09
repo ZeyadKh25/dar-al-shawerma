@@ -474,8 +474,28 @@
     const slides = document.querySelectorAll('#bsbTrack .bsb-slide');
     const dots = document.querySelectorAll('#bsbDots .bsb-dot');
     if (!slides.length) return;
-    bsbIndex = (index + slides.length) % slides.length;
+    const n = slides.length;
+    const prevIndex = bsbIndex;
+    bsbIndex = (index + n) % n;
     slides.forEach((el, i) => {
+      const computeOffset = (from) => {
+        let off = i - from;
+        if (off > n / 2) off -= n;
+        if (off < -n / 2) off += n;
+        return off;
+      };
+      const prevOffset = computeOffset(prevIndex);
+      const offset = computeOffset(bsbIndex);
+      if (Math.abs(offset - prevOffset) >= 2) {
+        // this slide needs to jump to the opposite off-screen side — snap instantly
+        // instead of animating it visibly across the center of the banner.
+        el.style.transition = 'none';
+        el.style.setProperty('--bsb-offset', offset);
+        void el.offsetHeight; // force reflow so the snap applies before re-enabling the transition
+        el.style.transition = '';
+      } else {
+        el.style.setProperty('--bsb-offset', offset);
+      }
       el.classList.toggle('is-active', i === bsbIndex);
       el.setAttribute('aria-hidden', i === bsbIndex ? 'false' : 'true');
     });
