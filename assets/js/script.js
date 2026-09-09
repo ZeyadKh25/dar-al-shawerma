@@ -511,7 +511,7 @@
   function bsbStartAutoplay() {
     if (bsbReducedMotion) return;
     bsbStopAutoplay();
-    bsbTimer = setInterval(bsbNext, 4500);
+    bsbTimer = setInterval(bsbNext, 2700);
   }
 
   function refreshBSB() {
