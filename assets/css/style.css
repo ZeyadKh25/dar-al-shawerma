@@ -26,8 +26,9 @@
   --dur: .5s;
   --ease: cubic-bezier(.22,.68,.15,1);
 }
-html[lang="ar"]{ --ff-accent: 'Aref Ruqaa', serif; }
-html[lang="en"]{ --ff-accent: 'Fraunces', serif; }
+
+html[lang="ar"]{ --ff-accent: 'Aref Ruqaa', serif; --ff-display: 'Lalezar', sans-serif; }
+html[lang="en"]{ --ff-accent: 'Fraunces', serif; --ff-display: 'Anton', sans-serif; }
 
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
@@ -51,7 +52,8 @@ h1,h2,h3,h4,p{ margin:0; }
 .eyebrow::before{ content:''; width:1.3em; height:2px; background:var(--accent); border-radius:2px; }
 
 .section-head{ max-width:640px; }
-.section-head h2{ font-size:clamp(1.9rem,3.2vw,2.7rem); font-weight:800; line-height:1.18; margin-block:.6em .5em; }
+.section-head h2{ font-family:var(--ff-display); font-size:clamp(2.1rem,3.4vw,3rem); font-weight:400; line-height:1.25; margin-block:.6em .5em; }
+.section-head h2.bsb-title{ font-family:'Anton', sans-serif; letter-spacing:.02em; }
 .section-head p{ color:var(--muted); font-size:1.05rem; max-width:46ch; }
 .section-head.center{ margin-inline:auto; text-align:center; }
 .section-head.center p{ margin-inline:auto; }
@@ -128,13 +130,13 @@ html[dir="rtl"] .btn-ghost:hover svg{ transform:scaleX(-1) translateX(4px); }
 .hero{ position:relative; overflow:hidden; padding-block:3.5rem 5rem; }
 @media (min-width:900px){ .hero{ padding-block:5rem 6.5rem; } }
 .hero-grid{ display:grid; gap:3rem; align-items:center; }
-@media (min-width:960px){ .hero-grid{ grid-template-columns:1.05fr .95fr; gap:2rem; } }
+@media (min-width:960px){ .hero-grid{ grid-template-columns:0.7fr .95fr; gap:2rem; } }
 .hero-copy{ padding-inline-start:1.5rem; padding-inline-end:1.5rem; }
 @media (min-width:900px){
   .hero-copy{ padding-inline-start:max(2.5rem, calc((100vw - var(--container)) / 2 + 2.5rem)); padding-inline-end:2.5rem; }
 }
-.hero-headline{ display:flex; flex-direction:column; line-height:1.08; letter-spacing:-.01em; }
-.hero-headline .line-1, .hero-headline .line-2{ font-size:clamp(3rem,7.6vw,5.2rem); font-weight:800; }
+.hero-headline{ display:flex; flex-direction:column; line-height:1.15; letter-spacing:-.01em; }
+.hero-headline .line-1, .hero-headline .line-2{ font-family:var(--ff-display); font-size:clamp(3rem,7.6vw,5.2rem); font-weight:400; }
 .hero-headline .line-1{ color:var(--charcoal); }
 .hero-headline .line-2{ color:var(--accent-dark); }
 .hero-copy .lede{ margin-top:1.7rem; font-size:1.12rem; color:var(--muted); max-width:44ch; }
