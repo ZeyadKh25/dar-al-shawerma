@@ -57,32 +57,82 @@
 </script>
 
   <!-- Splash screen. Inlined on purpose: no extra request, and it is styled
-       before assets/css/style.css is parsed. Removed from the DOM once gone. -->
+      before assets/css/style.css is parsed. Removed from the DOM once gone. -->
   <style>
-    html.is-loading { overflow: hidden; }
+    html.is-loading {
+      overflow: hidden;
+    }
+
     #preloader {
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.15rem;
-      background: #F6EFE2; color: #1B1613;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.15rem;
+      background: #F6EFE2;
+      color: #1B1613;
       font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
       transition: opacity .45s ease, visibility .45s ease;
     }
-    #preloader.is-done { opacity: 0; visibility: hidden; }
+
+    #preloader.is-done {
+      opacity: 0;
+      visibility: hidden;
+    }
+
     #preloader .pl-ring {
-      width: 44px; height: 44px; border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       border: 3px solid rgba(36, 30, 25, .13);
       border-top-color: #F98F20;
       animation: pl-spin .8s linear infinite;
     }
-    #preloader .pl-text { text-align: center; line-height: 1.5; }
-    #preloader .pl-text strong { display: block; font-size: 1.05rem; font-weight: 800; }
-    #preloader .pl-text span { display: block; font-size: .78rem; font-weight: 600; color: #655847; }
-    @keyframes pl-spin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce) { #preloader .pl-ring { animation-duration: 2.4s; } }
+
+    #preloader .pl-text {
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    #preloader .pl-text strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    #preloader .pl-text span {
+      display: block;
+      font-size: .78rem;
+      font-weight: 600;
+      color: #655847;
+    }
+
+    @keyframes pl-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #preloader .pl-ring {
+        animation-duration: 2.4s;
+      }
+    }
   </style>
   <script>document.documentElement.className += ' is-loading';</script>
   <noscript>
-    <style>#preloader { display: none; } html.is-loading { overflow: auto; }</style>
+    <style>
+      #preloader {
+        display: none;
+      }
+
+      html.is-loading {
+        overflow: auto;
+      }
+    </style>
   </noscript>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,17 +176,6 @@
     })();
   </script>
 
-  <!-- ============ TOP TRUST BAR ============ -->
-  <div class="topbar">
-    <div class="container">
-      <span data-ar="طازة كل يوم عالفحم" data-en="Fresh Charcoal-Grilled Daily">طازة كل يوم عالفحم</span>
-      <span class="dot">•</span>
-      <span data-ar="توصيل سريع بكل الخليل" data-en="Fast Delivery Across Hebron">توصيل سريع بكل الخليل</span>
-      <span class="dot">•</span>
-      <span><span class="stars">★★★★★</span> <span data-ar="بثقة أكتر من ٥٠٠٠ زبون"
-          data-en="Trusted by 5,000+ Customers">بثقة أكتر من ٥٠٠٠ زبون</span></span>
-    </div>
-  </div>
 
   <!-- ============ NAV ============ -->
   <nav class="nav" id="nav">
@@ -763,8 +802,7 @@
   <!-- ============ MOBILE STICKY CTA ============ -->
   <div class="mobile-sticky" id="mobileSticky">
     <div class="cart-info">
-      <span><span id="stickyCount">0</span> <span data-ar="أصناف"
-          data-en="Items">أصناف</span></span>
+      <span><span id="stickyCount">0</span> <span data-ar="أصناف" data-en="Items">أصناف</span></span>
       <b id="stickyTotal">0 ₪</b>
     </div>
     <button class="btn btn-primary" id="stickyViewBtn" data-ar="شوف الطلب" data-en="View Order">شوف الطلب</button>
