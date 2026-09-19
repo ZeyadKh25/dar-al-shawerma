@@ -80,6 +80,23 @@ html[dir="rtl"] .btn-ghost:hover svg{ transform:scaleX(-1) translateX(4px); }
 .reveal{ opacity:0; transform:translateY(22px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.in{ opacity:1; transform:none; }
 
+/* Directional card reveal. Each card is handed a direction and a delay by
+   script.js, worked out from where it actually sits in its row, so a grid
+   flows in from both edges instead of every card doing the same thing. */
+.sr{
+  opacity:0;
+  transform:translate3d(var(--sr-x,0px), var(--sr-y,20px), 0) scale(var(--sr-scale,.985));
+  transition:opacity .72s var(--ease), transform .72s var(--ease);
+  transition-delay:var(--sr-delay,0ms);
+}
+.sr.in{ opacity:1; transform:none; }
+/* the sideways travel must not widen the page while a card waits off-position;
+   clip (not hidden) keeps the pinned category bar working */
+main{ overflow-x:clip; }
+@media (prefers-reduced-motion:reduce){
+  .sr{ opacity:1; transform:none; transition:none; }
+}
+
 /* ============ TOP BAR ============ */
 .topbar{ background:var(--charcoal); color:var(--cream-2); font-size:.82rem; font-weight:600; padding:.55rem 0; letter-spacing:.01em; }
 .topbar .container{ display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap; text-align:center; }
@@ -90,10 +107,13 @@ html[dir="rtl"] .btn-ghost:hover svg{ transform:scaleX(-1) translateX(4px); }
 .nav{ position:sticky; top:0; z-index:100; background:rgba(246,239,226,.9); backdrop-filter:blur(10px); border-bottom:1px solid transparent; transition:border-color .3s, box-shadow .3s, background .3s; }
 .nav.scrolled{ border-color:var(--line); box-shadow:0 8px 24px -18px rgba(20,15,10,.5); background:rgba(246,239,226,.97); }
 .nav .container{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding-block:1rem; }
-.logo{ display:flex; align-items:center; gap:.65rem; font-weight:800; font-size:1.25rem; color:var(--charcoal); flex-shrink:0; }
+/* The wordmark uses the same display face as the hero headline (Lalezar in
+   Arabic, Anton in English). Both are single-weight, so it stays at 400 —
+   asking for 800 here would only get a synthesised bold. */
+.logo{ display:flex; align-items:center; gap:.65rem; font-family:var(--ff-display); font-weight:400; font-size:1.42rem; line-height:1.2; color:var(--charcoal); flex-shrink:0; }
 .logo .mark{ width:38px; height:38px; border-radius:50%; background:var(--cream-2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .logo .mark svg{ width:20px; height:20px; stroke:var(--accent-light); }
-.logo small{ display:block; font-weight:600; font-size:.62rem; color:var(--muted); letter-spacing:.06em; margin-top:.15em; }
+.logo small{ display:block; font-family:var(--ff); font-weight:600; font-size:.62rem; color:var(--muted); letter-spacing:.06em; margin-top:.15em; }
 .nav-links{ display:none; align-items:center; gap:2rem; font-weight:600; font-size:.94rem; }
 .nav-links a{ position:relative; padding-block:.3rem; color:var(--text); transition:color .2s; }
 .nav-links a::after{ content:''; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:0; background:var(--accent); transition:width .25s var(--ease); }
@@ -121,6 +141,8 @@ html[dir="rtl"] .btn-ghost:hover svg{ transform:scaleX(-1) translateX(4px); }
 .mobile-menu.open{ transform:none; }
 .mobile-menu .container{ display:flex; flex-direction:column; height:100%; padding-block:1.4rem 2rem; }
 .mobile-menu-top{ display:flex; align-items:center; justify-content:space-between; }
+/* the wordmark defaults to charcoal, which is this panel's own background */
+.mobile-menu .logo{ color:var(--cream); }
 .mobile-links{ display:flex; flex-direction:column; gap:1.5rem; margin-top:2.6rem; font-size:1.7rem; font-weight:800; }
 .mobile-links a{ color:var(--cream); transition:color .2s; }
 .mobile-links a.active{ color:var(--accent-light); }
@@ -216,17 +238,20 @@ html[dir="rtl"] .btn-ghost:hover svg{ transform:scaleX(-1) translateX(4px); }
 .bsb{ position:relative; border-radius:22px; overflow:hidden; box-shadow:var(--shadow-2); background:var(--charcoal); }
 .bsb-track{ display:grid; touch-action:pan-y; }
 .bsb-slide{
-  grid-area:1/1; display:grid; grid-template-columns:1fr;
+  /* minmax(0,…) rather than 1fr: a plain fr floors the column at the content's
+     min-content width, so a slide with a long line grew wider than the banner
+     and leaked past the clip edge as a sliver of the neighbouring slide. */
+  grid-area:1/1; display:grid; grid-template-columns:minmax(0,1fr);
   transform:translateX(calc(var(--bsb-offset, 0) * 100%));
   transition:transform .5s var(--ease);
   pointer-events:none;
 }
 .bsb-slide.is-active{ pointer-events:auto; }
-@media (min-width:820px){ .bsb-slide{ grid-template-columns:1.1fr .9fr; align-items:stretch; } }
-.bsb-media{ position:relative; aspect-ratio:16/10; background:radial-gradient(120% 120% at 30% 20%, var(--accent-light), var(--accent) 55%, var(--charcoal) 100%); }
+@media (min-width:820px){ .bsb-slide{ grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); align-items:stretch; } }
+.bsb-media{ position:relative; min-width:0; aspect-ratio:16/10; background:radial-gradient(120% 120% at 30% 20%, var(--accent-light), var(--accent) 55%, var(--charcoal) 100%); }
 @media (min-width:820px){ .bsb-media{ aspect-ratio:auto; } }
 .bsb-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.bsb-content{ padding:2rem 1.75rem 3.5rem; display:flex; flex-direction:column; justify-content:center; gap:.9rem; color:var(--cream); }
+.bsb-content{ padding:2rem 1.75rem 3.5rem; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:.9rem; color:var(--cream); overflow-wrap:anywhere; }
 @media (min-width:820px){ .bsb-content{ padding:3rem 3.2rem; } }
 .bsb-badge{ display:inline-flex; align-self:flex-start; background:var(--accent); color:var(--charcoal); font-size:.72rem; font-weight:800; letter-spacing:.03em; padding:.4rem .9rem; border-radius:var(--r-pill); }
 .bsb-content h3{ font-size:clamp(1.4rem,2.6vw,1.9rem); font-weight:800; }
@@ -260,10 +285,30 @@ html[dir="rtl"] .btn-ghost:hover svg{ transform:scaleX(-1) translateX(4px); }
 .add-btn svg{ width:14px; height:14px; }
 
 /* ============ MENU CATEGORY TABS ============ */
-.menu-tabs{ display:flex; gap:.6rem; overflow-x:auto; padding-bottom:.5rem; margin-bottom:2.5rem; scrollbar-width:none; }
+/* Sticky category bar: pins under the nav while you scroll/swipe the menu. */
+.menu-tabs-sentinel{ height:1px; margin-bottom:-1px; pointer-events:none; }
+.menu-tabs{
+  position:sticky; top:var(--nav-h,68px); z-index:60;
+  display:flex; gap:.6rem; overflow-x:auto; overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scroll-padding-inline:1.5rem;
+  padding-block:.85rem .75rem;
+  /* bleed to the container edges so the pinned bar spans the full width */
+  margin-inline:-1.5rem; padding-inline:1.5rem;
+  margin-bottom:2.5rem; scrollbar-width:none;
+  background:var(--cream);
+  border-bottom:1px solid transparent;
+  transition:border-color .25s, box-shadow .25s, background .25s;
+}
+@media (min-width:900px){
+  .menu-tabs{ margin-inline:-2.5rem; padding-inline:2.5rem; scroll-padding-inline:2.5rem; }
+}
 .menu-tabs::-webkit-scrollbar{ display:none; }
+.menu-tabs.stuck{ background:rgba(246,239,226,.97); backdrop-filter:blur(10px); border-bottom-color:var(--line); box-shadow:0 8px 24px -18px rgba(20,15,10,.5); }
+@media (prefers-reduced-motion:reduce){ .menu-tabs{ transition:none; } }
 .menu-tab{ flex-shrink:0; background:var(--white); border:1px solid var(--line); border-radius:var(--r-pill); padding:.65rem 1.3rem; font-weight:700; font-size:.85rem; color:var(--text); transition:background .2s,color .2s,border-color .2s; }
 .menu-tab.active{ background:var(--charcoal); color:var(--cream); border-color:var(--charcoal); }
+#menu{ scroll-margin-top:var(--nav-h,68px); }
 .menu-tab:not(.active):hover{ border-color:var(--accent-dark); color:var(--accent-dark); }
 
 /* ============ SOCIAL PROOF ============ */
@@ -412,6 +457,20 @@ html[dir="rtl"] .drawer{ --drawer-off:-100%; }
 .order-type input{ display:none; }
 .order-type span{ display:block; text-align:center; padding:.65rem; border:1px solid var(--line); border-radius:var(--r-s); font-weight:700; font-size:.82rem; transition:background .2s,border-color .2s,color .2s; cursor:pointer; }
 .order-type input:checked + span{ background:var(--charcoal); color:var(--cream); border-color:var(--charcoal); }
+/* order reference + timestamp strip at the top of the cart */
+.order-meta{ background:var(--white); border:1px solid var(--line); border-radius:var(--r-s); padding:.8rem 1rem; margin-bottom:1.2rem; display:flex; flex-direction:column; gap:.4rem; }
+.order-meta-row{ display:flex; justify-content:space-between; align-items:center; gap:1rem; font-size:.82rem; }
+.order-meta-row span{ color:var(--muted); font-weight:600; }
+.order-meta-row b{ font-weight:800; letter-spacing:.02em; }
+
+/* payment instructions above the send button */
+.pay-note{ margin-top:1.4rem; background:#FFF6E9; border:1px solid var(--accent-light); border-radius:var(--r-s); padding:1rem 1.1rem; }
+.pay-note h4{ margin:0 0 .45rem; font-size:.88rem; font-weight:800; color:var(--accent-dark); }
+.pay-note p{ margin:0; font-size:.84rem; line-height:1.6; color:var(--text); }
+.pay-num{ display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--accent-light); font-size:.84rem; }
+.pay-num span{ color:var(--muted); font-weight:600; }
+.pay-num b{ font-weight:800; letter-spacing:.03em; }
+
 .drawer-foot{ padding:1.3rem 1.5rem 1.6rem; border-top:1px solid var(--line); flex-shrink:0; background:var(--white); }
 .drawer-total{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1rem; }
 .drawer-total span{ font-size:.9rem; color:var(--muted); font-weight:700; }

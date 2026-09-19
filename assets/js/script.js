@@ -4,6 +4,15 @@
   // TODO(owner/developer): replace with the real Dar Al-Shawarma WhatsApp number.
   const WHATSAPP_NUMBER = "972592419577";
 
+  // Number customers transfer the payment to (shown with the payment instructions).
+  const PAYMENT_NUMBER = "0592419577";
+  // Number customers can call with questions about an order.
+  const CONTACT_NUMBER = "0592419577";
+  // Prefix for the generated order reference, e.g. DS-260918-4823
+  const ORDER_PREFIX = "DS";
+  // Shop timezone — order date/time is stamped in local shop time.
+  const SHOP_TIMEZONE = "Asia/Hebron";
+
   // Base folder for all real photography. Drop matching files here and they appear automatically —
   // see /assets/images/README.md for the exact filename each slot expects.
   const IMG_BASE = "assets/images/";
@@ -133,17 +142,46 @@
   }
 
   function renderMenuTabs() {
-    document.getElementById('menuTabs').innerHTML = CATEGORIES.map(c => `
+    const tabsEl = document.getElementById('menuTabs');
+    // keep the horizontal swipe position across re-renders
+    const prevScroll = tabsEl.scrollLeft;
+    tabsEl.innerHTML = CATEGORIES.map(c => `
     <button type="button" class="menu-tab ${c.id === activeCategory ? 'active' : ''}" data-cat="${c.id}">${esc(t(c.ar, c.en))}</button>
   `).join('');
+    tabsEl.scrollLeft = prevScroll;
+    // keep the selected category visible inside the pinned bar.
+    // measured from rects so it works the same in RTL and LTR.
+    const activeBtn = tabsEl.querySelector('.menu-tab.active');
+    if (activeBtn) {
+      const btn = activeBtn.getBoundingClientRect();
+      const bar = tabsEl.getBoundingClientRect();
+      const delta = (btn.left + btn.width / 2) - (bar.left + bar.width / 2);
+      if (Math.abs(delta) > 1) tabsEl.scrollBy({ left: delta, behavior: 'smooth' });
+    }
     document.querySelectorAll('.menu-tab').forEach(btn => {
-      btn.addEventListener('click', () => { activeCategory = btn.getAttribute('data-cat'); renderMenu(); });
+      btn.addEventListener('click', () => {
+        activeCategory = btn.getAttribute('data-cat');
+        renderMenu();
+        keepTabsInView();
+      });
     });
+  }
+
+  /* Sticky category bar: if the bar is already pinned when you switch category,
+     scroll so the new list starts right under it instead of jumping. */
+  function keepTabsInView() {
+    const tabsEl = document.getElementById('menuTabs');
+    const navH = document.getElementById('nav').offsetHeight;
+    if (tabsEl.getBoundingClientRect().top <= navH + 1) {
+      const y = window.scrollY + tabsEl.getBoundingClientRect().top - navH;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   }
 
   function renderMenu() {
     renderMenuTabs();
     document.getElementById('menuGrid').innerHTML = PRODUCTS.filter(p => p.cat === activeCategory).map(dishCardHTML).join('');
+    if (typeof wireScrollReveal === 'function') wireScrollReveal();
   }
 
   function renderGalleryTabs() {
@@ -167,6 +205,7 @@
       <span class="tag">${label}</span>
     </div>`;
     }).join('');
+    if (typeof wireScrollReveal === 'function') wireScrollReveal();
   }
 
   /* ============ CART LOGIC ============ */
@@ -175,6 +214,7 @@
 
   function addToCart(id, qty) {
     cart[id] = (cart[id] || 0) + qty;
+    ensureOrderNo();
     saveCart();
     refreshCartUI();
     const btn = document.querySelector(`.add-btn[data-id="${id}"]`);
@@ -219,6 +259,64 @@
         });
       }
     } catch (e) { }
+  }
+
+  /* ============ ORDER REFERENCE + TIMESTAMP ============ */
+  // One reference per order: created when the cart first fills, dropped when it empties.
+  let orderNo = '';
+
+  // Date/time broken into parts in shop time, with Latin digits so it stays
+  // readable inside WhatsApp regardless of the customer's device locale.
+  function shopParts(date) {
+    let parts = {};
+    try {
+      const fmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone: SHOP_TIMEZONE, year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+      });
+      fmt.formatToParts(date).forEach(p => { parts[p.type] = p.value; });
+    } catch (e) { }
+    if (!parts.year) {
+      const p2 = n => String(n).padStart(2, '0');
+      parts = {
+        year: String(date.getFullYear()), month: p2(date.getMonth() + 1), day: p2(date.getDate()),
+        hour: p2(date.getHours()), minute: p2(date.getMinutes())
+      };
+    }
+    return {
+      yyyy: parts.year, yy: String(parts.year).slice(-2),
+      mm: parts.month, dd: parts.day, hh: parts.hour, min: parts.minute
+    };
+  }
+
+  function orderDateText(date) {
+    const d = shopParts(date);
+    return `${d.dd}/${d.mm}/${d.yyyy}`;
+  }
+
+  function orderTimeText(date) {
+    const d = shopParts(date);
+    let h = parseInt(d.hh, 10);
+    const suffix = t(h < 12 ? 'ص' : 'م', h < 12 ? 'AM' : 'PM');
+    h = h % 12 || 12;
+    return `${h}:${d.min} ${suffix}`;
+  }
+
+  function ensureOrderNo() {
+    if (!orderNo) {
+      const d = shopParts(new Date());
+      const rand = String(Math.floor(1000 + Math.random() * 9000));
+      orderNo = `${ORDER_PREFIX}-${d.yy}${d.mm}${d.dd}-${rand}`;
+      try { localStorage.setItem('dar_alshawarma_order_no', orderNo); } catch (e) { }
+    }
+    return orderNo;
+  }
+  function resetOrderNo() {
+    orderNo = '';
+    try { localStorage.removeItem('dar_alshawarma_order_no'); } catch (e) { }
+  }
+  function loadOrderNo() {
+    try { orderNo = localStorage.getItem('dar_alshawarma_order_no') || ''; } catch (e) { }
   }
 
   function captureCustomerInfo() {
@@ -302,7 +400,38 @@
     </div>
   </div>`;
 
-    body.innerHTML = linesHTML + formHTML;
+    const now = new Date();
+    const metaHTML = `
+  <div class="order-meta">
+    <div class="order-meta-row">
+      <span>${esc(t('رقم الطلب', 'Order No.'))}</span>
+      <b dir="ltr">${esc(ensureOrderNo())}</b>
+    </div>
+    <div class="order-meta-row">
+      <span>${esc(t('التاريخ', 'Date'))}</span>
+      <b dir="ltr">${esc(orderDateText(now))}</b>
+    </div>
+    <div class="order-meta-row">
+      <span>${esc(t('الوقت', 'Time'))}</span>
+      <b>${esc(orderTimeText(now))}</b>
+    </div>
+  </div>`;
+
+    const payHTML = `
+  <div class="pay-note">
+    <h4>${esc(t('طريقة الدفع', 'Payment'))}</h4>
+    <p>${esc(t('يرجى تحويل المبلغ وإرسال صورة الإيصال ليتم اعتماد الطلب.', 'Please transfer the amount and send a photo of the receipt so your order can be confirmed.'))}</p>
+    <div class="pay-num">
+      <span>${esc(t('رقم التحويل', 'Transfer to'))}</span>
+      <b dir="ltr">${esc(PAYMENT_NUMBER)}</b>
+    </div>
+    <div class="pay-num">
+      <span>${esc(t('للاستفسار', 'Questions'))}</span>
+      <b dir="ltr">${esc(CONTACT_NUMBER)}</b>
+    </div>
+  </div>`;
+
+    body.innerHTML = metaHTML + linesHTML + formHTML + payHTML;
     document.getElementById('drawerTotal').textContent = cartTotal() + ' ₪';
 
     body.querySelectorAll('[data-inc]').forEach(b => b.addEventListener('click', () => changeCartQty(b.getAttribute('data-inc'), 1)));
@@ -319,14 +448,19 @@
   function refreshCartUI() {
     const count = cartCount();
     const total = cartTotal();
+    // an empty cart ends the order — the next one gets a fresh reference
+    if (count === 0) resetOrderNo();
+    // written defensively: one missing node must never take the whole cart down
+    const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
     const badge = document.getElementById('cartBadge');
-    badge.textContent = count;
-    badge.classList.toggle('show', count > 0);
-    document.getElementById('stickyCount').textContent = count;
-    document.getElementById('stickyTotal').textContent = total + ' ₪';
-    document.getElementById('mobileSticky').classList.toggle('show', count > 0);
+    if (badge) { badge.textContent = count; badge.classList.toggle('show', count > 0); }
+    setText('stickyCount', count);
+    setText('stickyTotal', total + ' ₪');
+    const sticky = document.getElementById('mobileSticky');
+    if (sticky) sticky.classList.toggle('show', count > 0);
     document.body.classList.toggle('has-cart-sticky', count > 0);
-    document.getElementById('clearCartBtn').style.display = count > 0 ? 'inline' : 'none';
+    const clearBtn = document.getElementById('clearCartBtn');
+    if (clearBtn) clearBtn.style.display = count > 0 ? 'inline' : 'none';
     renderDrawer();
   }
 
@@ -340,8 +474,13 @@
     const notes = (document.getElementById('custNotes') || {}).value.trim() || '';
     const divider = '----------------------------';
 
+    const now = new Date();
+
     let lines = [];
     lines.push(t('*دار الشاورما — طلب جديد*', '*Dar Al-Shawarma — New Order*'));
+    lines.push(`${t('رقم الطلب', 'Order No.')}: ${ensureOrderNo()}`);
+    lines.push(`${t('التاريخ', 'Date')}: ${orderDateText(now)}`);
+    lines.push(`${t('الوقت', 'Time')}: ${orderTimeText(now)}`);
     lines.push(divider);
 
     // customer info block (only shown if at least one field was filled)
@@ -369,6 +508,19 @@
     });
     lines.push(divider);
     lines.push(t(`*الإجمالي: ${cartTotal()}₪*`, `*Total: ${cartTotal()}₪*`));
+    lines.push(divider);
+
+    // payment instructions
+    lines.push(t('*طريقة الدفع*', '*Payment*'));
+    lines.push(t(
+      `يرجى تحويل المبلغ على الرقم: ${PAYMENT_NUMBER}`,
+      `Please transfer the amount to: ${PAYMENT_NUMBER}`
+    ));
+    lines.push(t(
+      'وإرسال صورة الإيصال ليتم اعتماد الطلب ✅',
+      'and send a photo of the receipt so the order can be confirmed ✅'
+    ));
+    lines.push(`${t('للاستفسار', 'Questions')}: ${CONTACT_NUMBER}`);
     lines.push('');
     lines.push(t('شكرًا إلكم 🙏', 'Thank you 🙏'));
 
@@ -417,7 +569,9 @@
     document.getElementById('langBtn').textContent = (lang === 'ar') ? 'EN' : 'AR';
     document.querySelectorAll('[data-ar]').forEach(el => {
       const val = el.getAttribute('data-' + lang);
-      if (val !== null) el.textContent = val;
+      // never overwrite a wrapper that holds other elements — textContent would
+      // delete them (that is how the cart counter used to disappear on switch)
+      if (val !== null && !el.firstElementChild) el.textContent = val;
     });
     document.querySelectorAll('[data-ar-html]').forEach(el => {
       const val = el.getAttribute('data-' + lang + '-html');
@@ -583,6 +737,7 @@
     renderGallery();
     refreshBSB();
     refreshCartUI();
+    if (typeof wireScrollReveal === 'function') wireScrollReveal();
   }
 
   /* ============ EVENTS ============ */
@@ -624,9 +779,50 @@
   document.getElementById('waDirectBtn').addEventListener('click', function (e) { e.preventDefault(); window.location.href = waGenericLink(); });
   document.getElementById('waDirectBtn2').addEventListener('click', function (e) { e.preventDefault(); window.location.href = waGenericLink(); });
 
-  // sticky nav shadow
+  // sticky nav shadow + pinned menu category bar
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 8); }, { passive: true });
+  const menuTabsEl = document.getElementById('menuTabs');
+
+  // A 1px sentinel sits just above the category bar: once it passes the nav line
+  // the bar is pinned, and that is when the shadow goes on.
+  const tabsSentinel = document.createElement('div');
+  tabsSentinel.className = 'menu-tabs-sentinel';
+  tabsSentinel.setAttribute('aria-hidden', 'true');
+  menuTabsEl.parentNode.insertBefore(tabsSentinel, menuTabsEl);
+
+  // expose the live nav height so the category bar can pin right beneath it
+  function syncNavHeight() {
+    document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    updatePinned();
+  }
+
+  function updatePinned() {
+    const navH = nav.offsetHeight;
+    const sentinelTop = tabsSentinel.getBoundingClientRect().top;
+    const barBottom = menuTabsEl.getBoundingClientRect().bottom;
+    // pinned = the bar has reached its offset and its section is still on screen
+    menuTabsEl.classList.toggle('stuck', sentinelTop < navH && barBottom > navH);
+  }
+
+  let scrollTicking = false;
+  let settleTimer;
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+    updatePinned();
+    scrollTicking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) { scrollTicking = true; requestAnimationFrame(onScroll); }
+    // a jump (anchor link, scrollIntoView) can settle after the last scroll
+    // event, so re-measure once things stop moving
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(onScroll, 120);
+  }, { passive: true });
+
+  syncNavHeight();
+  window.addEventListener('resize', syncNavHeight, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(syncNavHeight).observe(nav);
+  onScroll();
 
   // mobile menu
   const mobileMenu = document.getElementById('mobileMenu');
@@ -648,6 +844,76 @@
   }, { threshold: .15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  /* ============ DIRECTIONAL CARD REVEAL ============ */
+  // Cards in a grid come in from the side they sit on — left column from the
+  // left, right column from the right, a lone column simply rises. Direction
+  // and delay are measured from the real layout, so it follows whatever the
+  // breakpoint decided and works the same in RTL and LTR.
+  const SR_SHIFT = 40;   // px of sideways travel
+  const SR_STEP = 90;    // ms between neighbours in a row
+  const SR_MAX_STEPS = 4;
+
+  const srObserver = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('in');
+      srObserver.unobserve(en.target);
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -5% 0px' });
+
+  function wireScrollReveal() {
+    if (bsbReducedMotion) return;  // same media query the carousel already respects
+    const rtl = document.documentElement.dir === 'rtl';
+
+    document.querySelectorAll('[data-sr-group]').forEach(group => {
+      const fresh = Array.from(group.children).filter(el => el.nodeType === 1 && !el.classList.contains('sr'));
+      if (!fresh.length) return;
+
+      const gRect = group.getBoundingClientRect();
+      const gMid = gRect.left + gRect.width / 2;
+
+      // bucket by row, so each row flows in as one wave rather than the whole grid at once
+      const rows = new Map();
+      fresh.forEach(el => {
+        const r = el.getBoundingClientRect();
+        const key = Math.round(r.top / 8);
+        if (!rows.has(key)) rows.set(key, []);
+        rows.get(key).push({ el: el, r: r });
+      });
+
+      rows.forEach(row => {
+        // the wave starts from the edge the reader starts at
+        row.sort((a, b) => rtl ? b.r.left - a.r.left : a.r.left - b.r.left);
+        row.forEach((item, i) => {
+          const mid = item.r.left + item.r.width / 2;
+          const delta = mid - gMid;
+          // a card only travels sideways when it is clearly off-centre —
+          // otherwise a single-column layout would slide in from nowhere
+          const sideways = row.length > 1 && Math.abs(delta) > item.r.width * 0.3;
+          item.el.style.setProperty('--sr-x', sideways ? (delta < 0 ? -SR_SHIFT : SR_SHIFT) + 'px' : '0px');
+          item.el.style.setProperty('--sr-y', sideways ? '14px' : '26px');
+          item.el.style.setProperty('--sr-delay', Math.min(i, SR_MAX_STEPS) * SR_STEP + 'ms');
+          item.el.classList.add('sr');
+          srObserver.observe(item.el);
+        });
+      });
+    });
+  }
+
+  // a resize can change the column count, so re-measure the cards that have
+  // not been seen yet; ones already revealed keep their place untouched
+  let srResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(srResizeTimer);
+    srResizeTimer = setTimeout(() => {
+      document.querySelectorAll('[data-sr-group] > .sr:not(.in)').forEach(el => {
+        srObserver.unobserve(el);
+        el.classList.remove('sr');
+      });
+      wireScrollReveal();
+    }, 200);
+  }, { passive: true });
+
   // language toggle
   document.getElementById('langBtn').addEventListener('click', () => {
     currentLang = (currentLang === 'ar') ? 'en' : 'ar';
@@ -664,7 +930,9 @@
 
   /* ============ INIT ============ */
   loadCart();
+  loadOrderNo();
   fullRerender();
   initBSB();
   initNavScrollSpy();
+  wireScrollReveal();
 })();

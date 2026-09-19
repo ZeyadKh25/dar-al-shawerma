@@ -56,6 +56,35 @@
 }
 </script>
 
+  <!-- Splash screen. Inlined on purpose: no extra request, and it is styled
+       before assets/css/style.css is parsed. Removed from the DOM once gone. -->
+  <style>
+    html.is-loading { overflow: hidden; }
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.15rem;
+      background: #F6EFE2; color: #1B1613;
+      font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+      transition: opacity .45s ease, visibility .45s ease;
+    }
+    #preloader.is-done { opacity: 0; visibility: hidden; }
+    #preloader .pl-ring {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 3px solid rgba(36, 30, 25, .13);
+      border-top-color: #F98F20;
+      animation: pl-spin .8s linear infinite;
+    }
+    #preloader .pl-text { text-align: center; line-height: 1.5; }
+    #preloader .pl-text strong { display: block; font-size: 1.05rem; font-weight: 800; }
+    #preloader .pl-text span { display: block; font-size: .78rem; font-weight: 600; color: #655847; }
+    @keyframes pl-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { #preloader .pl-ring { animation-duration: 2.4s; } }
+  </style>
+  <script>document.documentElement.className += ' is-loading';</script>
+  <noscript>
+    <style>#preloader { display: none; } html.is-loading { overflow: auto; }</style>
+  </noscript>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -65,6 +94,37 @@
 </head>
 
 <body>
+
+  <!-- ============ SPLASH SCREEN ============ -->
+  <div id="preloader" role="status" aria-live="polite">
+    <div class="pl-ring" aria-hidden="true"></div>
+    <div class="pl-text">
+      <strong>دار الشاورما</strong>
+      <span>عم نجهّز المنيو…</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var pl = document.getElementById('preloader');
+      if (!pl) return;
+      var started = Date.now(), finished = false;
+      function hide() {
+        if (finished) return;
+        finished = true;
+        // stay up for a beat so a fast load does not flash the screen
+        setTimeout(function () {
+          pl.classList.add('is-done');
+          document.documentElement.className =
+            document.documentElement.className.replace(/\bis-loading\b/, '').trim();
+          setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); }, 500);
+        }, Math.max(0, 400 - (Date.now() - started)));
+      }
+      if (document.readyState === 'complete') hide();
+      else window.addEventListener('load', hide);
+      // never trap the visitor behind a slow image or font
+      setTimeout(hide, 3500);
+    })();
+  </script>
 
   <!-- ============ TOP TRUST BAR ============ -->
   <div class="topbar">
@@ -338,7 +398,7 @@
               الكامل.</p>
           </div>
         </div>
-        <div class="cat-grid reveal" id="catTiles"></div>
+        <div class="cat-grid" id="catTiles" data-sr-group></div>
       </div>
     </section>
 
@@ -361,7 +421,7 @@
             </svg>
           </a>
         </div>
-        <div class="dish-grid reveal" id="bestSellersGrid"></div>
+        <div class="dish-grid" id="bestSellersGrid" data-sr-group></div>
       </div>
     </section>
 
@@ -376,7 +436,7 @@
             اختار الكمية لكل صنف، ضيفه عالطلب، وابعت الطلب كامل عالواتساب.</p>
         </div>
         <div class="menu-tabs reveal" id="menuTabs"></div>
-        <div class="dish-grid reveal" id="menuGrid"></div>
+        <div class="dish-grid" id="menuGrid" data-sr-group></div>
       </div>
     </section>
 
@@ -398,7 +458,7 @@
               data-en="Orders Served">طلبية متوصلة</span></div>
         </div>
         <!-- PLACEHOLDER REVIEWS: replace with real customer reviews before launch -->
-        <div class="testi-track reveal">
+        <div class="testi-track" data-sr-group>
           <div class="testi-card">
             <div class="stars">★★★★★</div>
             <p data-ar="أصدق شاورما بالخليل، وطعمها زي أول مرة بكل مرة. صراحة صرت أطلب منهم كل أسبوع."
@@ -493,7 +553,7 @@
             الطلب</span>
           <h2 data-ar="من الرغبة لباب بيتك" data-en="From Craving to Your Door">من الرغبة لباب بيتك</h2>
         </div>
-        <div class="steps reveal">
+        <div class="steps" data-sr-group>
           <div class="step">
             <div class="step-num">01</div>
             <h3 data-ar="اختار وضيف عالطلب" data-en="Choose & Add to Order">اختار وضيف عالطلب</h3>
@@ -525,7 +585,7 @@
           <h2 data-ar="شوف شو عم نشوي" data-en="See What We're Grilling">شوف شو عم نشوي</h2>
         </div>
         <div class="gallery-tabs reveal" id="galleryTabs"></div>
-        <div class="gallery-grid reveal" id="galleryGrid"></div>
+        <div class="gallery-grid" id="galleryGrid" data-sr-group></div>
         <div class="gallery-cta reveal">
           <a href="#" class="btn btn-outline" data-ar="تابعنا عالإنستغرام" data-en="Follow us on Instagram">تابعنا
             عالإنستغرام</a>
@@ -703,7 +763,7 @@
   <!-- ============ MOBILE STICKY CTA ============ -->
   <div class="mobile-sticky" id="mobileSticky">
     <div class="cart-info">
-      <span data-ar="السلة" data-en="Cart"><span id="stickyCount">0</span> <span data-ar="أصناف"
+      <span><span id="stickyCount">0</span> <span data-ar="أصناف"
           data-en="Items">أصناف</span></span>
       <b id="stickyTotal">0 ₪</b>
     </div>
